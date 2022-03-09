@@ -36,70 +36,73 @@ def help_command():
 
 if __name__ == '__main__':
     if len(sys.argv) > 1:
-        com = sys.argv[1]
+        # Список переданных аргуметов начиная с 1 индекса
+        commands = sys.argv[1:]
     else:
         help_command()
         # Ввод команды, strip() - для удаления пробелов по краям в строке
-        com = input('Введите команду (? - показать список команд): ').strip()
+        commands = input('Введите команду или список команд через пробел (? - показать список команд): ').strip()
+        commands = commands.split()
 
-    print('=' * 10, f'start {com}', '=' * 10)
+    for com in commands:
+        print('=' * 10, f'start {com}', '=' * 10)
 
-    if com == 'create_local':
-        for locale in LOCALES:
-            cmd = 'django-admin makemessages -l'
-            os.system(f'{cmd} {locale}')
-    elif com == 'update_local':
-        os.system('django-admin makemessages -a')
-        os.system('django-admin compilemessages')
-    elif com == 'collect_static':
-        os.system('python manage.py collectstatic')
-    elif com == 'make_migrations':
-        os.system('python manage.py makemigrations')
-    elif com == 'make_migrations_app':
-        app_name = input('Введите название приложения: ').strip()
-        if app_name != '':
-            os.system(f'python manage.py makemigrations {app_name}')
-        else:
-            print('Необходимо вести название приложения!')
-    elif com == 'make_empty_migrations_app':
-        app_name = input('Введите название приложения: ').strip()
-        if app_name != '':
-            os.system(f'python manage.py makemigrations --empty {app_name}')
-        else:
-            print('Необходимо вести название приложения!')
-    elif com == 'migrate':
-        os.system('python manage.py migrate')
-    elif com == 'create_superuser':
-        os.system('python manage.py createsuperuser')
-    elif com == 'create_app':
-        app_name = input('Введите название приложения: ').strip()
-        if app_name != '':
-            os.system(f'python manage.py startapp {app_name}')
-        else:
-            print('Необходимо вести название приложения!')
-    elif com == 'run_server':
-        port = input(f'Введите порт (по умолчанию: {DEFAULT_PORT}): ').strip()
-        os.system(f'python manage.py runserver {port}')
-    elif com == 'install_requirements':
-        name = input(f'Введите название файла (по умолчанию: {DEFAULT_REQUIREMENTS}): ').strip()
-        if name == '':
-            name = DEFAULT_REQUIREMENTS
-        os.system(f'pip install -r {name}')
-    elif com == 'print_requirements':
-        cmd = 'pip freeze'
-        print('Список зависмостей для проекта:')
-        os.system(f'{cmd}')
-        is_yes = input('Сохранить этот список в файл? (yes или no): ').strip()
-        if is_yes == 'yes' or is_yes == 'y':
+        if com == 'create_local':
+            for locale in LOCALES:
+                cmd = 'django-admin makemessages -l'
+                os.system(f'{cmd} {locale}')
+        elif com == 'update_local':
+            os.system('django-admin makemessages -a')
+            os.system('django-admin compilemessages')
+        elif com == 'collect_static':
+            os.system('python manage.py collectstatic')
+        elif com == 'make_migrations':
+            os.system('python manage.py makemigrations')
+        elif com == 'make_migrations_app':
+            app_name = input('Введите название приложения: ').strip()
+            if app_name != '':
+                os.system(f'python manage.py makemigrations {app_name}')
+            else:
+                print('Необходимо вести название приложения!')
+        elif com == 'make_empty_migrations_app':
+            app_name = input('Введите название приложения: ').strip()
+            if app_name != '':
+                os.system(f'python manage.py makemigrations --empty {app_name}')
+            else:
+                print('Необходимо вести название приложения!')
+        elif com == 'migrate':
+            os.system('python manage.py migrate')
+        elif com == 'create_superuser':
+            os.system('python manage.py createsuperuser')
+        elif com == 'create_app':
+            app_name = input('Введите название приложения: ').strip()
+            if app_name != '':
+                os.system(f'python manage.py startapp {app_name}')
+            else:
+                print('Необходимо вести название приложения!')
+        elif com == 'run_server':
+            port = input(f'Введите порт (по умолчанию: {DEFAULT_PORT}): ').strip()
+            os.system(f'python manage.py runserver {port}')
+        elif com == 'install_requirements':
             name = input(f'Введите название файла (по умолчанию: {DEFAULT_REQUIREMENTS}): ').strip()
             if name == '':
                 name = DEFAULT_REQUIREMENTS
-            os.system(f'{cmd} > {name}')
-            print(f'Сохранено в файл {name}')
-    elif com == 'help' or com == '?':
-        help_command()
-    else:
-        print(f'Такой команды {com} нет!')
-        help_command()
+            os.system(f'pip install -r {name}')
+        elif com == 'print_requirements':
+            cmd = 'pip freeze'
+            print('Список зависимостей для проекта:')
+            os.system(f'{cmd}')
+            is_yes = input('Сохранить этот список в файл? (yes или no): ').strip()
+            if is_yes == 'yes' or is_yes == 'y':
+                name = input(f'Введите название файла (по умолчанию: {DEFAULT_REQUIREMENTS}): ').strip()
+                if name == '':
+                    name = DEFAULT_REQUIREMENTS
+                os.system(f'{cmd} > {name}')
+                print(f'Сохранено в файл {name}')
+        elif com == 'help' or com == '?':
+            help_command()
+        else:
+            print(f'Такой команды {com} нет!')
+            help_command()
 
-    print('=' * 10, f'end {com}', '=' * 10)
+        print('=' * 10, f'end {com}', '=' * 10, '\n')
