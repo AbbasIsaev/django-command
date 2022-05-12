@@ -50,9 +50,9 @@ if __name__ == '__main__':
         if com == 'create_local':
             for locale in LOCALES:
                 cmd = 'django-admin makemessages -l'
-                os.system(f'{cmd} {locale}')
+                os.system(f'{cmd} {locale} -i venv')
         elif com == 'update_local':
-            os.system('django-admin makemessages -a')
+            os.system('django-admin makemessages -a -i venv')
             os.system('django-admin compilemessages')
         elif com == 'collect_static':
             os.system('python manage.py collectstatic')
