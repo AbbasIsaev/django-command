@@ -55,7 +55,7 @@ if __name__ == '__main__':
                 os.system(f'{cmd} {locale} -i venv')
         elif com == 'update_local' or com == '2':
             os.system('django-admin makemessages -a -i venv')
-            os.system('django-admin compilemessages')
+            os.system('django-admin compilemessages -i venv')
         elif com == 'collect_static' or com == '3':
             os.system('python manage.py collectstatic')
         elif com == 'make_migrations' or com == '4':
