@@ -21,7 +21,7 @@ COMMANDS = {
     'make_empty_migrations_app': 'Создание пустой миграции для приложения. '
                                  'Используется для добавления default данных в таблицу БД',
     'migrate': 'Применение миграций',
-    'create_superuser': 'Создание пользовтеля с правами superuser. '
+    'create_superuser': 'Создание пользователя с правами superuser. '
                         'Если не работает попробуйте запустить в терминале: '
                         f'python {CURRENT_SCRIPT_NAME} create_superuser',
     'create_app': 'Создание приложения',
@@ -31,10 +31,11 @@ COMMANDS = {
                           f'а также позволяет сохранить этот список в файл (по умолчанию {DEFAULT_REQUIREMENTS})'
 }
 
-if __name__ == '__main__':
+
+def cli():
     answers = {}
     if len(sys.argv) > 1:
-        # Список переданных аргуметов начиная с 1 индекса
+        # Список переданных аргументов начиная с 1 индекса
         answers['commands'] = sys.argv[1:]
     else:
         choices_commands = [
@@ -48,6 +49,8 @@ if __name__ == '__main__':
             )
         ]
         answers = inquirer.prompt(questions)
+        if answers is None:
+            return
 
     for com in answers['commands']:
         try:
@@ -185,3 +188,7 @@ if __name__ == '__main__':
             print(f'Такой команды {com} нет!')
 
         print('=' * 10, f'end {com}', '=' * 10, '\n')
+
+
+if __name__ == '__main__':
+    cli()

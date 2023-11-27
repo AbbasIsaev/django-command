@@ -1,29 +1,39 @@
-# DjangoFastCommands
+# django-command
 
-DjangoFastCommands - список часто используемых команд при разработке проектов на Django.
+django-command - приложение, которое позволяет выполнять часто используемые команды при разработке проектов на Django.
+
+### Установка
+
+```shell
+python install django-command
+```
 
 ### Запуск
 
-```shell
-python command.py
-```
+Существует несколько способов запуска команд:
 
-### Доступные команды
+1. В терминале наберите django-command, после этого появится список доступных команд для выполнения, отметьте через
+   пробел какие команды выполнить. Отмеченные команды будут выполняться по порядку выбора.
+   ```shell
+   (venv) PS .\> django-command
+   [?] Выберите 1 или несколько команд:
+    > [ ] create_local                   [1] Создание локалей ['ru', 'en']
+      [ ] update_local                   [2] Обновление и компилирование локалей
+      [ ] collect_static                 [3] Сборка статических файлов в папку STATIC_ROOT
+      [ ] make_migrations                [4] Создание миграций
+      [ ] make_migrations_app            [5] Создание первой миграции для приложения
+      [ ] make_empty_migrations_app      [6] Создание пустой миграции для приложения. Используется для добавления default данных в таблицу БД
+      [ ] migrate                        [7] Применение миграций
+      [ ] create_superuser               [8] Создание пользовтеля с правами superuser. Если не работает попробуйте запустить в терминале: python command.py create_superuser
+      [ ] create_app                     [9] Создание приложения
+      [ ] run_server                     [10] Запуск проекта на порту (по умолчанию 8000)
+      [ ] install_requirements           [11] Установит все зависимости для проекта из файла (по умолчанию requirements.txt)
+      [ ] print_requirements             [12] Автоматически сгенерирует все необходимые зависимости для проекта, а также позволяет сохранить этот список в файл (по умолчанию requirements.txt)
+   ```
 
-```shell
-(venv) .\DjangoFastCommands>python command.py
-Доступные команды:
-create_local                   Создание локалей ['ru', 'en']
-update_local                   Обновление и компилирование локалей
-collect_static                 Сборка статических файлов в папку STATIC_ROOT
-make_migrations                Создание миграций
-make_migrations_app            Создание первой миграции для приложения
-make_empty_migrations_app      Создание пустой миграции для приложения. Используется для добавления default данных в таблицу БД
-migrate                        Применение миграций
-create_superuser               Создание пользовтеля с правами superuser. Если не работает попробуйте запустить в терминале: python command.py create_superuser
-create_app                     Создание приложения
-run_server                     Запуск проекта на порту (по умолчанию 8000)
-install_requirements           Установит все зависимости для проекта из файла (по умолчанию requirements.txt)
-print_requirements             Автоматически сгенерирует все необходимые зависимости для проекта, а также позволяет сохранить этот список в файл (по умолчанию requirements.txt)
-help или ?                     Описания команд
-```
+2. Команды можно выполнять по их названию или по номеру.
+    ```shell
+    django-command make_migrations migrate
+    # or
+    django-command 4 7
+    ```
