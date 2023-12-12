@@ -16,7 +16,7 @@ maintainers = [
 #authors = [
 #    { name = "Isaev Abbas", email = "abbas.isaev@gmail.com" }
 #]
-description = "Часто используемые команды при разработке проектов на Django."
+description = "Django-command is a command line tool that allows you to run commonly used commands in development Django projects."
 readme = "README.md"
 license = { file = "LICENSE" }
 keywords = ["django-command", "Django", "cli"]
@@ -27,7 +27,7 @@ classifiers = [
 ]
 
 [tool.setuptools.dynamic]
-version = { attr = "django_command.__version__" }
+version = { attr = "django_command.command.__version__" }
 
 [project.urls]
 Homepage = "https://github.com/AbbasIsaev/django-command"

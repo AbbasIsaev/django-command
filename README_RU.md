@@ -1,21 +1,20 @@
 # django-command
 
-Django-command is a command line tool that allows you to run commonly used commands in development
-Django projects.
+Django-command - инструмент командной строки, который позволяет выполнять часто используемые команды при разработке
+проектов на Django.
 
-### Installation
+### Установка
 
 ```shell
 pip install django-command
 ```
 
-### Launch
+### Запуск
 
-There are several ways to run commands:
+Существует несколько способов запуска команд:
 
-1. In the terminal, type django-command, after which a list of available commands for execution will appear, check
-   through
-   space which commands to execute. The marked commands will be executed in the order they were selected.
+1. В терминале наберите django-command, после этого появится список доступных команд для выполнения, отметьте через
+   пробел какие команды выполнить. Отмеченные команды будут выполняться по порядку выбора.
    ```shell
    (venv) PS .\> django-command
    [?] Select 1 or more commands:
@@ -33,7 +32,7 @@ There are several ways to run commands:
       [ ] print_requirements             [12] Automatically generates all the necessary dependencies for the project, and also allows you to save this list to a file (default "requirements.txt") [--save_in_file requirements.txt]
    ```
 
-2. Commands can be executed by their name or number.
+2. Команды можно выполнять по их названию или по номеру.
     ```shell
     django-command make_migrations migrate
     # or with argument
@@ -42,7 +41,7 @@ There are several ways to run commands:
     django-command 4 7
     ```
 
-#### List of commands and arguments
+#### Список команд и аргументов
 
  ```shell
 (venv) PS .\> django-command -h
