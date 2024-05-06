@@ -27,7 +27,7 @@ pip install django-command
       [ ] migrate                        [7] Applying migrations [--db_label default]
       [ ] create_superuser               [8] Creating a user with superuser rights
       [ ] create_app                     [9] Creating an application
-      [ ] run_server                     [10] Running a project on a port (default "8000") [--port 8000]
+      [ ] run_server                     [10] Running a project on a port number, or ipaddr:port (default "127.0.0.1:8000") [--port 127.0.0.1:8000]
       [ ] install_requirements           [11] Install all dependencies for a project from a file (default "requirements.txt")
       [ ] print_requirements             [12] Automatically generates all the necessary dependencies for the project, and also allows you to save this list to a file (default "requirements.txt") [--save_in_file requirements.txt]
    ```
@@ -60,6 +60,6 @@ optional arguments:
                         database label for "migrate" command
   -s SAVE_IN_FILE, --save_in_file SAVE_IN_FILE
                         save to file for "print_requirements" command
-  -p PORT, --port PORT  port for "run_server" command
+  -p PORT, --port PORT  port number, or ipaddr:port for "run_server" command
   -v, --version         show program's version number and exit
 ```

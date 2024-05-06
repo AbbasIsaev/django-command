@@ -4,14 +4,14 @@ import sys
 
 import inquirer
 
-__version__ = '2.1.0'
+__version__ = '2.2.0'
 
 # Имя этого файла
 CURRENT_SCRIPT_NAME = os.path.basename(__file__)
 # Список локалей
 LOCALES = ['ru', 'en']
 DEFAULT_REQUIREMENTS = 'requirements.txt'
-DEFAULT_PORT = '8000'
+DEFAULT_ADDR_PORT = '127.0.0.1:8000'
 DEFAULT_DB_LABEL = 'default'
 
 # Список команд
@@ -26,7 +26,8 @@ COMMANDS = {
     'migrate': f'Applying migrations [--db_label {DEFAULT_DB_LABEL}]',
     'create_superuser': 'Creating a user with superuser rights',
     'create_app': 'Creating an application',
-    'run_server': f'Running a project on a port (default "{DEFAULT_PORT}") [--port {DEFAULT_PORT}]',
+    'run_server': f'Running a project on a port number, or ipaddr:port '
+                  f'(default "{DEFAULT_ADDR_PORT}") [--port {DEFAULT_ADDR_PORT}]',
     'install_requirements': f'Install all dependencies for a project from a file (default "{DEFAULT_REQUIREMENTS}")',
     'print_requirements': 'Automatically generates all the necessary dependencies for the project, '
                           f'and also allows you to save this list to a file (default "{DEFAULT_REQUIREMENTS}") '
@@ -55,7 +56,8 @@ def cli():
         parser.add_argument('commands', nargs='+', type=str, help=f'commands to run: {", ".join(COMMANDS.keys())}')
         parser.add_argument('-db', '--db_label', help='database label for "migrate" command')
         parser.add_argument('-s', '--save_in_file', help='save to file for "print_requirements" command')
-        parser.add_argument('-p', '--port', default=DEFAULT_PORT, help='port for "run_server" command')
+        parser.add_argument('-p', '--port', default=DEFAULT_ADDR_PORT,
+                            help='port number, or ipaddr:port for "run_server" command')
         parser.add_argument('-v', '--version', action='version', version=__version__)
         args = parser.parse_args()
 
@@ -158,19 +160,19 @@ def cli():
                 print('You must enter the name of the application!')
         elif com == 'run_server':
             if args and args.port:
-                port = args.port
+                addr_port = args.port
             else:
                 question = [
                     inquirer.Text(
-                        'port',
-                        message='Enter port',
-                        default=DEFAULT_PORT
+                        'addr_port',
+                        message='Enter port number, or ipaddr:port',
+                        default=DEFAULT_ADDR_PORT
                     )
                 ]
                 answer = inquirer.prompt(question)
-                port = answer['port']
+                addr_port = answer['addr_port']
 
-            os.system(f'python manage.py runserver {port}')
+            os.system(f'python manage.py runserver {addr_port}')
         elif com == 'install_requirements':
             question = [
                 inquirer.Text(
